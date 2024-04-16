@@ -1,0 +1,33 @@
+﻿@using _3._04_HW.Data
+@model HistoryViewModel
+
+<div class="container">
+    <div class="header">
+        <h1 class="text-white">History for @Model.Contributor.FirstName @Model.Contributor.LastName</h1>
+        <h3 class="text-white">Current Balance: @Model.Balance</h3>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped table-dark" style="text-align:center; vertical-align:middle;">
+            <tr>
+                <th>Action</th>
+                <th>Date</th>
+                <th>Amount</th>
+            </tr>
+            @foreach(Transaction t in Model.Transactions)
+            {
+               <tr>
+                   @if(t.Description != "Deposit")
+                    {
+                        t.Description = $"Contribution for {t.Description}";
+                    }
+                   <td>@t.Description</td>
+                   <td style="text-align:center; vertical-align:middle;">@t.Date</td>
+                    <td style="text-align:center; vertical-align:middle;">@t.Amount</td>
+               </tr>
+            }
+        </table>
+    </div>
+    <div style="text-align:center;">
+        <a class="btn btn-danger" href="/contributor/contributors">Back to Contributors</a>
+    </div>
+</div>
